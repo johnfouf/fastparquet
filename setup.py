@@ -25,11 +25,11 @@ class build_ext(_build_ext):
 allowed = ('--help-commands', '--version', 'egg_info', 'clean')
 if len(sys.argv) >= 2 and ('--help' in sys.argv[1:] or sys.argv[1] in allowed):
     # NumPy and cython are not required for these actions. They must succeed
-    # so pip can install fastparquet when these requirements are not available.
+    # so pip can install fastparquet1 when these requirements are not available.
     extra = {}
 else:
     modules_to_build = {
-        'fastparquet.speedups': ['fastparquet/speedups.pyx']
+        'fastparquet1.speedups': ['fastparquet1/speedups.pyx']
     }
     try:
         from Cython.Build import cythonize
@@ -50,12 +50,12 @@ else:
 install_requires = open('requirements.txt').read().strip().split('\n')
 
 setup(
-    name='fastparquet',
+    name='fastparquet1',
     version='0.3.1',
     description='Python support for Parquet file format',
     author='Martin Durant',
     author_email='mdurant@continuum.io',
-    url='https://github.com/dask/fastparquet/',
+    url='https://github.com/johnfouf/fastparquet1/',
     license='Apache License 2.0',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -70,7 +70,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
-    packages=['fastparquet'],
+    packages=['fastparquet1'],
     cmdclass={'build_ext': build_ext},
     install_requires=install_requires,
     setup_requires=[
@@ -92,7 +92,7 @@ setup(
     ],
     long_description=(open('README.rst').read() if os.path.exists('README.rst')
                       else ''),
-    package_data={'fastparquet': ['*.thrift']},
+    package_data={'fastparquet1': ['*.thrift']},
     include_package_data=True,
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*,",
     **extra
